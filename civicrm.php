@@ -23,7 +23,7 @@
  * version 2.5.0 by Brian Shaughnessy
  * version 2.6.0 by Brian Shaughnessy (CiviCRM 4.4/Joomla 2.5.18 compatibility)
  * version 3.x by Sri Jella (CiviCRM 4.4/Joomla 2.5.20 compatibility)
- * 
+ *
  * For updates, see: https://github.com/lcdservices/CiviCRM-CiviAuthenticate
  */
 
