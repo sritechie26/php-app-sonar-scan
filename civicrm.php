@@ -3,7 +3,7 @@
  * Joomla/CiviCRM Authentication plugin
  *
  * This plugin authenticates against the Joomla user table and
- * then checks with CiviCRM that the user has a valid current 
+ * then checks with CiviCRM that the user has a valid current
  * membership record
  *
  * @author      Henry Bennett <henry@bec-cave.org.uk>
