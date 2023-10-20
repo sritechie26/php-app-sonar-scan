@@ -8,12 +8,12 @@
  *
  * @author      Henry Bennett <henry@bec-cave.org.uk>
  *              Brian Shaughnessy <brian@lcdservices.biz>
- *			    Sri Jella <sritechie26@gmail.com>
+ *			        Sri Jella <sritechie26@gmail.com>
  * @version     2.1.0
  * @package     Joomla
  * @subpackage  JFramework
  * @since       Joomla 1.6
- * @copyright   
+ * @copyright
  *
  * version 1.0.4 by Brian Shaughnessy
  * version 1.0.5 by Brian Shaughnessy
