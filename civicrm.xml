@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="authentication" method="upgrade">
+	<name>Authentication - CiviCRM</name>
+	<author>Henry Bennett, Brian Shaughnessy</author>
+	<creationDate>July 2013</creationDate>
+	<copyright/>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>henry@nospam.bec-cave.org.uk, brian@lcdservices.biz</authorEmail>
+	<authorUrl>www.civicrm.org</authorUrl>
+	<version>2.6.0</version>
+	<description>PLG_CIVICRM_DESCRIPTION</description>
+	<scriptfile>install.php</scriptfile>
+	<files>
+		<filename plugin="civicrm">civicrm.php</filename>
+		<filename>index.html</filename>
+		<filename>civimembershiplevels.php</filename>
+		<filename>civimembershiptypes.php</filename>
+		<filename>usergroup.php</filename>
+		<folder>language</folder>
+	</files>
+  <languages folder="language">
+    <language tag="en-GB">en-GB/en-GB.plg_authentication_civicrm.ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_authentication_civicrm.sys.ini</language>
+  </languages>
+	<config>
+		<fields name="params" addfieldpath="/administrator/components/com_civicrm/civicrm/joomla/site/elements">
+
+			<fieldset name="Login"
+				label="PLG_CIVICRM_FIELDSET_LOGIN">
+
+        <field name="block_access" type="radio"
+          default="1"
+          label="PLG_CIVICRM_FIELD_BLOCK_ACCESS_LABEL"
+          description="PLG_CIVICRM_FIELD_BLOCK_ACCESS_DESC"
+        >
+          <option value="1">JYes</option>
+          <option value="0">JNo</option>
+        </field>
+
+        <field name="username_email" type="radio"
+          default="0"
+          label="PLG_CIVICRM_FIELD_USERNAME_EMAIL_LABEL"
+          description="PLG_CIVICRM_FIELD_USERNAME_EMAIL_DESC"
+        >
+          <option value="1">JYes</option>
+          <option value="0">JNo</option>
+        </field>
+
+				<field name="use_current" type="radio"
+					default="1"
+					label="PLG_CIVICRM_FIELD_USE_CURRENT_LABEL"
+					description="PLG_CIVICRM_FIELD_USE_CURRENT_DESC"
+				>
+          <option value="1">JYes</option>
+					<option value="0">JNo</option>
+				</field>
+
+				<field name="is_current_CiviMember" type="civimembershiplevels"  
+					default="1" 
+					label="PLG_CIVICRM_FIELD_IS_CURRENT_LABEL" 
+					description="PLG_CIVICRM_FIELD_IS_CURRENT_DESC"
+					value_field="name" 
+				/>
+
+        <field name="login_spacer_1" type="spacer" hr="true"/>
+				<field name="login_spacer_desc_1" type="spacer" label="PLG_CIVICRM_FIELD_LOGIB_SPACER_DESC_1"/>
+				<field name="redirect_old_membership" type="menuitem"
+					default="" 
+					state="1" 
+					label="PLG_CIVICRM_FIELD_REDIRECT_OLD_LABEL"
+					description="PLG_CIVICRM_FIELD_REDIRECT_OLD_DESC"
+					size=""
+				/>
+				<field name="redirect_bad_password" type="menuitem"
+					default=""
+					state="1" 
+					label="PLG_CIVICRM_FIELD_REDIRECT_BAD_PWORD_LABEL"
+					description="PLG_CIVICRM_FIELD_REDIRECT_BAD_PWORD_DESC"
+					size=""
+				/>
+				<field name="redirect_no_match" type="menuitem"
+					default="" 
+					state="1" 
+					label="PLG_CIVICRM_FIELD_REDIRECT_NO_MATCH_LABEL" 
+					description="PLG_CIVICRM_FIELD_REDIRECT_NO_MATCH_DESC"
+					size=""
+				/>
+				<field name="login_spacer_2" type="spacer" hr="true"/>
+				<field name="login_spacer_desc_2" type="spacer" label="PLG_CIVICRM_FIELD_LOGIB_SPACER_DESC_2"/>
+
+				<field name="expired_method" type="radio" 
+					default="1" 
+					label="PLG_CIVICRM_FIELD_EXPIRED_METHOD_LABEL"
+					description="PLG_CIVICRM_FIELD_EXPIRED_METHOD_DESC"
+				>
+				    <option value="1">Menu Item</option>
+				    <option value="0">Contribution Page</option>
+				</field>
+
+				<field name="redirect_expired_menu" type="menuitem" 
+					state="1" 
+					default="" 
+					label="PLG_CIVICRM_FIELD_REDIRECT_EXPIRED_MENU_LABEL" 
+					description="PLG_CIVICRM_FIELD_REDIRECT_EXPIRED_MENU_DESC" 
+				/>
+			
+				<field name="redirect_expired_contribpage" type="civicontribpages" 
+					default="" 
+					label="PLG_CIVICRM_FIELD_REDIRECT_EXPIRED_CONTRIB_LABEL" 
+					description="PLG_CIVICRM_FIELD_REDIRECT_EXPIRED_CONTRIB_DESC" 
+					/>
+			</fieldset>
+
+			<fieldset name="mem_status_acces_control"
+				label="PLG_CIVICRM_FIELDSET_ACCESS">
+
+				<field name="advanced_features_status" type="radio"
+					default="0"
+					description="PLG_CIVICRM_FIELD_USE_ADVANCED_DESC"
+					label="PLG_CIVICRM_FIELD_USE_ADVANCED_LABEL"
+				>
+          <option value="1">JYes</option>
+					<option value="0">JNo</option>
+				</field>
+
+				<field name="spacer_access_control_MS_text" type="spacer" 
+					label="PLG_CIVICRM_FIELD_MS_ACCESS_CONTOL_LABEL"
+					description="PLG_CIVICRM_FIELD_MS_ACCESS_CONTOL_DESC"/>
+
+				<field name="spacer1" type="spacer" hr="true" />
+					<field name="CiviMember_Level_1" type="civimembershiplevels"
+					  readonly="true"
+					  default="1"
+					  label="Membership Status 1"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_1" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer2" type="spacer" hr="true" />
+					<field name="CiviMember_Level_2" type="civimembershiplevels"
+					  readonly="true"
+					  default="2"
+					  label="Membership Status 2"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_2" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer3" type="spacer" hr="true" />
+					<field name="CiviMember_Level_3" type="civimembershiplevels"
+					  readonly="true"
+					  default="3"
+					  label="Membership Status 3"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					 />
+					<field name="user_group_3" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer4" type="spacer" hr="true" />
+					<field name="CiviMember_Level_4" type="civimembershiplevels"
+					  readonly="true"
+						default="4"
+						label="Membership Status 4"
+						description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_4" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>
+
+				<field name="spacer5" type="spacer" hr="true" />
+					<field name="CiviMember_Level_5" type="civimembershiplevels"
+					  readonly="true"
+					  default="5"
+					  label="Membership Status 5"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					 />
+					<field name="user_group_5" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer6" type="spacer" hr="true" />
+					<field name="CiviMember_Level_6" type="civimembershiplevels"
+					  readonly="true"
+					  default="6"
+					  label="Membership Status 6"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_6" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer7" type="spacer" hr="true" />
+					<field name="CiviMember_Level_7" type="civimembershiplevels"
+					 readonly="true"
+					 default="7"
+					 label="Membership Status 7"
+					 description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_7" type="usergroup"
+					  default=""
+					  state="1"
+					  label="Joomla User Group"
+					  description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+					  size=""
+					/>
+
+				<field name="spacer8" type="spacer" hr="true" />
+					<field name="CiviMember_Level_8" type="civimembershiplevels"
+						readonly="true"
+						default="8"
+						label="Membership Status 8"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_8" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>
+				
+				<!--- extra new membership Statuses STARTS here-->
+				<field name="spacer9" type="spacer" hr="true" />
+					<field name="CiviMember_Level_9" type="civimembershiplevels"
+						readonly="true"
+						default="9"
+						label="Membership Status 9"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_9" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer10" type="spacer" hr="true" />
+					<field name="CiviMember_Level_10" type="civimembershiplevels"
+						readonly="true"
+						default="10"
+						label="Membership Status 10"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_10" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer11" type="spacer" hr="true" />
+					<field name="CiviMember_Level_11" type="civimembershiplevels"
+						readonly="true"
+						default="11"
+						label="Membership Status 11"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_11" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer12" type="spacer" hr="true" />
+					<field name="CiviMember_Level_12" type="civimembershiplevels"
+						readonly="true"
+						default="12"
+						label="Membership Status 12"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_12" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer13" type="spacer" hr="true" />
+					<field name="CiviMember_Level_13" type="civimembershiplevels"
+						readonly="true"
+						default="13"
+						label="Membership Status 13"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_13" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer14" type="spacer" hr="true" />
+					<field name="CiviMember_Level_14" type="civimembershiplevels"
+						readonly="true"
+						default="14"
+						label="Membership Status 14"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_14" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer15" type="spacer" hr="true" />
+					<field name="CiviMember_Level_15" type="civimembershiplevels"
+						readonly="true"
+						default="15"
+						label="Membership Status 15"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_15" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>	
+					
+				<field name="spacer16" type="spacer" hr="true" />
+					<field name="CiviMember_Level_16" type="civimembershiplevels"
+						readonly="true"
+						default="16"
+						label="Membership Status 16"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_16" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>		
+				<field name="spacer17" type="spacer" hr="true" />
+					<field name="CiviMember_Level_17" type="civimembershiplevels"
+						readonly="true"
+						default="17"
+						label="Membership Status 17"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_17" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>		
+				<field name="spacer18" type="spacer" hr="true" />
+					<field name="CiviMember_Level_18" type="civimembershiplevels"
+						readonly="true"
+						default="18"
+						label="Membership Status 18"
+					  description="PLG_CIVICRM_FIELD_CIVICRM_LEVEL_DESC"
+					/>
+					<field name="user_group_18" type="usergroup"
+						default=""
+						state="1"
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+					/>		
+			
+			
+			
+			
+		<!---extra  new membership Statuses ENDS here-->
+				<!-- To add additional Membership Status Levels repeat the group above -->
+			</fieldset>
+
+			<fieldset name="mem_type_access_control"
+				label="PLG_CIVICRM_FIELDSET_MEMBERSHIP">
+
+				<field name="advanced_features_type" type="radio"
+					default="0"
+					description="PLG_CIVICRM_FIELD_USE_ADVANCED_MEMEBERSHIP_DESC"
+					label="PLG_CIVICRM_FIELD_USE_ADVANCED_MEMEBERSHIP_LABEL"
+				>
+          <option value="1">JYes</option>
+					<option value="0">JNo</option>
+				</field>
+
+				<field name="spacer_access_control_MT_text" type="spacer" 
+					label="PLG_CIVICRM_FIELD_MT_ACCESS_CONTOL_LABEL" 
+					description="PLG_CIVICRM_FIELD_MT_ACCESS_CONTOL_DESC"/>
+
+				<field name="spacerT1" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_1" type="civimembershiptypes"
+						readonly="true"
+						default="1" 
+						label="Membership Type 1" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_1" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT2" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_2" type="civimembershiptypes"
+						readonly="true"
+						default="2" 
+						label="Membership Type 2" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_2" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT3" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_3" type="civimembershiptypes"
+						readonly="true"
+						default="3" 
+						label="Membership Type 3" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_3" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT4" type="spacer" hr="true" />
+			 	<field name="CiviMember_TACL_Level_4" type="civimembershiptypes"
+						readonly="true" 
+						default="4" 
+						label="Membership Type 4"
+					        description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"	
+				/>
+				<field name="TACL_user_group_4" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT5" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_5" type="civimembershiptypes"
+						readonly="true"
+						default="5" 
+						label="Membership Type 5" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_5" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT6" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_6" type="civimembershiptypes"
+						readonly="true"
+						default="6" 
+						label="Membership Type 6" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_6" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT7" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_7" type="civimembershiptypes"
+						readonly="true"
+						default="7" 
+						label="Membership Type 7" 
+						description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_7" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+				
+				<field name="spacerT8" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_8" type="civimembershiptypes"
+						readonly="true"
+						default="8" 
+						label="Membership Type 8"
+				    description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_8" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<!--- new membership types  STARTS here-->
+			<field name="spacerT9" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_9" type="civimembershiptypes"
+						readonly="true"
+						default="9" 
+						label="Membership Type 9"
+				    description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_9" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				<field name="spacerT10" type="spacer" hr="true" />
+				<field name="CiviMember_TACL_Level_10" type="civimembershiptypes"
+						readonly="true"
+						default="10" 
+						label="Membership Type 10"
+				    description="PLG_CIVICRM_FIELD_CIVICRM_TYPES_DESC"
+				/>
+				<field name="TACL_user_group_10" type="usergroup"
+						default=""
+						state="1" 
+						label="Joomla User Group"
+						description="PLG_CIVICRM_FIELD_JOOMLA_USER_GROUP_DESC"
+						size=""
+				/>
+
+				
+				<!--- new membership types  ENDS here-->
+				<!-- To add additional Membership Type Levels repeat the group above -->
+			</fieldset>
+				
+		</fields>
+	</config>
+</extension>
