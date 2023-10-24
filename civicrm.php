@@ -170,7 +170,7 @@ class plgAuthenticationCiviCRM extends JPlugin
     $redirectURLs['old_membership_item'] = $menu->getItem( $redirectURLs['old_membership_itemid'] );
     $redirectURLs['old_membership'] = JRoute::_($redirectURLs['old_membership_item']->link
       .'&Itemid='
-      .$redirectURLs['old_membership_itemid'], FALSE);
+      .$redirectURLs['old_membership_itemid'], false);
 
     $redirectURLs['bad_password_itemid'] = $this->params->get('redirect_bad_password');
     $redirectURLs['bad_password_item'] = $menu->getItem( $redirectURLs['bad_password_itemid'] );
