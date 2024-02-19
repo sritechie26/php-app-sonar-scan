@@ -6,16 +6,11 @@ on:
       - master
       - main
       - develop
-      - feature/*
-      - release/*
 
   pull_request:
     branches:
       - main
       - develop
-      - feature/*
-      - release/*
-      - release2del/*
 
 
 jobs:
